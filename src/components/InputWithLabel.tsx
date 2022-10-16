@@ -1,12 +1,25 @@
 import { StyledInput } from "./StyledInput";
 
-export const InputWithLabel = ({
+type Props<
+  Field extends string,
+  FormData extends { [key in Field]: string }
+> = {
+  field: Field;
+  label: string;
+  value: FormData;
+  onChange: (callback: (oldValue: FormData) => FormData) => void;
+} & Omit<React.ComponentProps<typeof StyledInput>, "id" | "value" | "onChange">;
+
+export const InputWithLabel = <
+  Field extends string,
+  FormData extends { [key in Field]: string }
+>({
   field,
   label,
   value,
   onChange,
   ...inputProps
-}) => {
+}: Props<Field, FormData>) => {
   return (
     <div className="space-y-6 sm:space-y-5">
       <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">

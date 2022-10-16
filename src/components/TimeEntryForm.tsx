@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { InputWithLabel } from "./InputWithLabel";
+import { NewTimeEntry } from "../hooks/useTimeEntries";
 
-const initialFormData = { comment: "", start: "", end: "" };
+interface FormData {
+  comment: string;
+  start: string;
+  end: string;
+}
 
-const isFormDataValid = (formData) => {
+const initialFormData: FormData = { comment: "", start: "", end: "" };
+
+const isFormDataValid = (formData: FormData) => {
   if (formData.comment === "") {
     return false;
   }
@@ -17,7 +24,13 @@ const isFormDataValid = (formData) => {
   return start <= end;
 };
 
-export const TimeEntryForm = ({ onLogTime }) => {
+interface Props {
+  onLogTime: (timeEntry: NewTimeEntry) => void;
+}
+
+export const TimeEntryForm: React.FunctionComponent<Props> = ({
+  onLogTime,
+}) => {
   const [formData, setFormData] = useState(initialFormData);
 
   const isValid = isFormDataValid(formData);

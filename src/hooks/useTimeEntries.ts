@@ -1,8 +1,17 @@
 import { useState } from "react";
 import { v4 } from "uuid";
 
+export interface TimeEntry {
+  id: string;
+  comment: string;
+  start: Date;
+  end: Date;
+}
+
+export type NewTimeEntry = Omit<TimeEntry, "id">;
+
 export const useTimeEntries = () => {
-  const [timeEntries, setTimeEntries] = useState([
+  const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([
     {
       id: "394ec61d-741d-411a-bdc7-e5a9c5efe53d",
       comment: "My first time entry",
@@ -19,7 +28,7 @@ export const useTimeEntries = () => {
 
   return {
     timeEntries,
-    logTime: (timeEntry) => {
+    logTime: (timeEntry: NewTimeEntry) => {
       setTimeEntries((oldTimeEntries) => [
         ...oldTimeEntries,
         { id: v4(), ...timeEntry },
