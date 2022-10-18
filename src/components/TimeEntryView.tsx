@@ -1,4 +1,12 @@
-export const TimeEntryView = ({ timeEntry }) => {
+import { TimeEntry } from "../types/TimeEntry";
+
+interface Props {
+  timeEntry: TimeEntry;
+}
+
+export const TimeEntryView: React.FunctionComponent<Props> = ({
+  timeEntry,
+}) => {
   return (
     <li>
       <div className="flex items-center px-4 py-4 sm:px-6">
